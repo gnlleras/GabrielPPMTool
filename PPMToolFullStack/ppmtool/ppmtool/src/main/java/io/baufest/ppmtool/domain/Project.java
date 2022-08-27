@@ -52,11 +52,11 @@ public class Project {
 	}
 
 	public String getDesription() {
-		return desription;
+		return description;
 	}
 
 	public void setDesription(String desription) {
-		this.desription = desription;
+		this.description = desription;
 	}
 
 	public Date getStart_date() {
