@@ -66,12 +66,12 @@ public class Project {
 		this.projectIdentifier = projectIdentifier;
 	}
 
-	public String getDesription() {
+	public String getDescription() {
 		return description;
 	}
 
-	public void setDesription(String desription) {
-		this.description = desription;
+	public void setDesription(String description) {
+		this.description = description;
 	}
 
 	public Date getStart_date() {
