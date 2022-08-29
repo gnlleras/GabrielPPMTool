@@ -71,7 +71,7 @@ public class Project {
 	}
 
 	public void setDesription(String description) {
-		this.description = description;
+		this.description = description; 
 	}
 
 	public Date getStart_date() {
