@@ -3,7 +3,7 @@ import React, { Component } from "react";
 class AddProject extends Component {
   constructor() {
     super();
-
+    //Estado inicial de los campos del proyecto.
     this.state = {
       projectName: "",
       projectIdentifier: "",
@@ -11,15 +11,17 @@ class AddProject extends Component {
       start_date: "",
       end_date: "",
     };
-
+    //Operaciones que permiten el cambio de estado de los campos.
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  //Setea valores en cada campo en particular.
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  //Crea un nuevo objeto con los valores ingresados.
   onSubmit(e) {
     e.preventDefault();
     const newProjectObject = {
@@ -31,7 +33,7 @@ class AddProject extends Component {
     };
     console.log(newProjectObject);
   }
-
+  //Devuelve los campos con valores actualizados en ejecucion.
   render() {
     return (
       <div>

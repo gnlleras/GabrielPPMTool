@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+// Proyecto hardcodeado
 class ProjectItem extends Component {
   render() {
     return (

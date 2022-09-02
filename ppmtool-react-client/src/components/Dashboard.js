@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import CreateProjectButton from "./Project/CreateProjectButton";
 import ProjectItem from "./Project/ProjectItem";
 
+//Menu de proyectos
 class Dashboard extends Component {
   render() {
     return (
