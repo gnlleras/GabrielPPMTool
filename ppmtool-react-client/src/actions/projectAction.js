@@ -5,6 +5,11 @@ export const createProject = (project, history) => async (dispatch) => {
   try {
     const res = await axios.post("http://localhost:8080/api/project", project);
     history.push("/dashboard");
+    dispatch({
+      //aca se toman los errores desde la BD y se cargan al payload
+      type: GET_ERRORS,
+      payload: {},
+    });
   } catch (err) {
     dispatch({
       //aca se toman los errores desde la BD y se cargan al payload
