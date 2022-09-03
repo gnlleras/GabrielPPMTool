@@ -4,7 +4,6 @@ import ProjectItem from "./Project/ProjectItem";
 import PropTypes from "prop-types";
 import { connect } from "react-redux"; //para conectarnos con la store
 import { getProjects } from "../actions/projectAction";
-import classnames from "classnames";
 
 //Menu de proyectos
 class Dashboard extends Component {
@@ -14,6 +13,8 @@ class Dashboard extends Component {
   }
 
   render() {
+    const { projects } = this.props.project;
+
     return (
       <div className="projects">
         <div className="container">
@@ -26,8 +27,9 @@ class Dashboard extends Component {
 
               <br />
               <hr />
-
-              <ProjectItem />
+              {projects.map((project) => (
+                <ProjectItem key={project.id} project={project} />
+              ))}
             </div>
           </div>
         </div>
