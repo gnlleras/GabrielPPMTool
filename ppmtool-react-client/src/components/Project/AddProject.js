@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createProject } from "../../actions/projectAction";
+import classnames from "classnames";
 
 class AddProject extends Component {
   constructor() {
@@ -20,7 +21,7 @@ class AddProject extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  //Life cycle hooks
+  //Life cycle hooks. Almacena los errors en el state para que pueda ser utilizado en el render.
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
@@ -59,35 +60,56 @@ class AddProject extends Component {
                   <div className="form-group">
                     <input
                       type="text"
-                      className="form-control form-control-lg "
+                      className={classnames("form-control form-control-lg ", {
+                        "is-invalid": errors.projectName, //cuando haya errores en projectName se cambia el msj
+                      })}
                       placeholder="Project Name"
                       name="projectName"
                       value={this.state.projectName}
                       onChange={this.onChange}
                     />
-                    <p>{errors.projectName}</p>
+                    {errors.projectName && ( //error desde BD
+                      //style bootstrap
+                      <div className="invalid-feedback">
+                        {errors.projectName}
+                      </div>
+                    )}
                   </div>
                   <div className="form-group">
                     <input
                       type="text"
-                      className="form-control form-control-lg"
+                      className={classnames("form-control form-control-lg ", {
+                        "is-invalid": errors.projectIdentifier, //cuando haya errores en projectName se cambia el msj
+                      })}
                       placeholder="Unique Project ID"
                       name="projectIdentifier"
                       value={this.state.projectIdentifier}
                       onChange={this.onChange}
                     />
-                    <p>{errors.projectIdentifier}</p>
+                    {errors.projectIdentifier && ( //error desde BD
+                      //style bootstrap
+                      <div className="invalid-feedback">
+                        {errors.projectIdentifier}
+                      </div>
+                    )}
                   </div>
 
                   <div className="form-group">
                     <textarea
-                      className="form-control form-control-lg"
+                      className={classnames("form-control form-control-lg ", {
+                        "is-invalid": errors.description, //cuando haya errores en projectName se cambia el msj
+                      })}
                       placeholder="Project Description"
                       name="description"
                       value={this.state.description}
                       onChange={this.onChange}
                     ></textarea>
-                    <p>{errors.description}</p>
+                    {errors.description && ( //error desde BD
+                      //style bootstrap
+                      <div className="invalid-feedback">
+                        {errors.description}
+                      </div>
+                    )}
                   </div>
                   <h6>Start Date</h6>
                   <div className="form-group">
@@ -126,11 +148,11 @@ class AddProject extends Component {
 
 AddProject.propTypes = {
   createProject: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired, //componentWillReceiveProps pregunta por estas props
 };
 
 const mapStateToProps = (state) => ({
-  errors: state.errors,
+  errors: state.errors, //trae la data desde la State(Store) y la guarda en props. Se usa en componentWillReceiveProps
 });
 
 export default connect(mapStateToProps, { createProject })(AddProject);

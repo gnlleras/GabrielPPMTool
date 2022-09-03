@@ -7,6 +7,7 @@ export const createProject = (project, history) => async (dispatch) => {
     history.push("/dashboard");
   } catch (err) {
     dispatch({
+      //aca se toman los errores desde la BD y se cargan al payload
       type: GET_ERRORS,
       payload: err.response.data,
     });

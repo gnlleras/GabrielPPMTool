@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Header from "./components/Layout/Header";
 import AddProject from "./components/Project/AddProject";
-import { Provider } from "react-redux";
+import { Provider } from "react-redux"; // Define la store que usamos en la aplicacion. Union react-redux
 import store from "./store";
 
 //Esta clase es la que se renderiza

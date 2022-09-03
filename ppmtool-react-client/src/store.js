@@ -7,6 +7,7 @@ const middleware = [thunk];
 
 let store;
 
+//Crea store en navegador Chrome
 if (window.navigator.userAgent.includes("Chrome")) {
   store = createStore(
     rootReducer,
