@@ -1,4 +1,4 @@
-import { GET_PROJECTS, GET_PROJECT } from "../actions/types";
+import { GET_PROJECTS, GET_PROJECT, DELETE_PORJECT } from "../actions/types";
 
 const initialState = {
   projects: [],
@@ -16,6 +16,14 @@ export default function (state = initialState, action) {
       return {
         ...state,
         project: action.payload,
+      };
+    case DELETE_PORJECT:
+      return {
+        ...state,
+        projects: state.projects.filter(
+          (project) => project.projectIdentifier !== action.payload //action.payload es el id,
+          //por eso no lo agrega al array de projects
+        ),
       };
     default:
       return state;
