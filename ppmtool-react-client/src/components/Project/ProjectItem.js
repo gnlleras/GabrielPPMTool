@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { deleteProject } from "../../actions/projectAction";
 
-// Proyecto hardcodeado
 class ProjectItem extends Component {
   onDeleteClick = (id) => {
     this.props.deleteProject(id);
