@@ -2,11 +2,14 @@ package io.baufest.ppmtool.domain;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.validation.constraints.NotBlank;
@@ -40,6 +43,9 @@ public class Project {
 	@JsonFormat(pattern = "yyyy-mm-dd")
 	private Date updated_At;
 	
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "project")
+	private Backlog backlog;
+	
 	public Project() {	
 	}
 	
@@ -71,7 +77,7 @@ public class Project {
 		return description;
 	}
 
-	public void setDesription(String description) {
+	public void setDescription(String description) {
 		this.description = description; 
 	}
 
@@ -106,7 +112,15 @@ public class Project {
 	public void setUpdated_At(Date updated_At) {
 		this.updated_At = updated_At;
 	}
+	
 
+	public Backlog getBacklog() {
+		return backlog;
+	}
+
+	public void setBacklog(Backlog backlog) {
+		this.backlog = backlog;
+	}
 
 	@PrePersist
 	protected void onCreate(){
