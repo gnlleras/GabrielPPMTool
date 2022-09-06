@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import io.baufest.ppmtool.domain.Backlog;
 import io.baufest.ppmtool.domain.Project;
 import io.baufest.ppmtool.domain.ProjectTask;
+import io.baufest.ppmtool.exceptions.ProjectIdException;
 import io.baufest.ppmtool.exceptions.ProjectNotFoundException;
 import io.baufest.ppmtool.repositories.BacklogRepository;
 import io.baufest.ppmtool.repositories.ProjectRepository;
@@ -68,5 +69,13 @@ public class ProjectTaskService {
 			throw new ProjectNotFoundException("Project whit ID: '"+id+"' does not exist");
 		}
 		return projectTaskRepository.findByProjectIdentifierOrderByPriority(id);
+	}
+	
+	
+	public ProjectTask findPTByProjectSequence(String backlog_id, String pt_id){
+		
+		ProjectTask projectTask = projectTaskRepository.findByProjectSequence(pt_id);
+		
+		return projectTask;
 	}
 }
