@@ -32,7 +32,7 @@ public class ProjectTask {
 	private Date dueDate;
 	
 	//ManyToOne whit Backlog
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "backlog_id", updatable = false, nullable = false)
 	@JsonIgnore
 	private Backlog backlog;
@@ -170,6 +170,7 @@ public class ProjectTask {
 	}
 
 
+	//we persist here the date
 
 	@PrePersist
 	protected void onCreate() {
