@@ -155,4 +155,4 @@ const mapStateToProps = (state) => ({
   errors: state.errors, //trae la data desde la State(Store) y la guarda en props. Se usa en componentWillReceiveProps
 });
 
-export default connect(mapStateToProps, { createProject })(AddProject);
+export default connect(mapStateToProps, { createProject })(AddProject); //conecta state con componente
