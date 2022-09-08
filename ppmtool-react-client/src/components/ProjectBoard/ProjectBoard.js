@@ -13,6 +13,9 @@ class ProjectBoard extends Component {
 
   render() {
     const { id } = this.props.match.params;
+
+    const { project_tasks } = this.props.backlog;
+
     return (
       <div className="container">
         <Link to={`/addProjectTask/${id}`} className="btn btn-primary mb-3">
@@ -21,7 +24,7 @@ class ProjectBoard extends Component {
         <br />
         <hr />
 
-        <Backlog />
+        <Backlog project_tasks_props={project_tasks} />
       </div>
     );
   }
