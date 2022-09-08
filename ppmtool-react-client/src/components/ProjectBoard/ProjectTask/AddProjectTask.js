@@ -24,6 +24,12 @@ class AddProjectTask extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
+
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -47,6 +53,7 @@ class AddProjectTask extends Component {
 
   render() {
     const { id } = this.props.match.params;
+    const { errors } = this.state;
 
     return (
       <div className="add-PBI">
@@ -62,35 +69,57 @@ class AddProjectTask extends Component {
                 <div className="form-group">
                   <input
                     type="text"
-                    className="form-control form-control-lg"
+                    className={classnames("form-control form-control-lg ", {
+                      "is-invalid": errors.summary, //cuando haya errores en summary se cambia el msj
+                    })}
                     name="summary"
                     placeholder="Project Task summary"
                     value={this.state.summary}
                     onChange={this.onChange}
                   />
+                  {errors.summary && ( //error desde BD
+                    //style bootstrap
+                    <div className="invalid-feedback">{errors.summary}</div>
+                  )}
                 </div>
                 <div className="form-group">
                   <textarea
-                    className="form-control form-control-lg"
+                    className={classnames("form-control form-control-lg ", {
+                      "is-invalid": errors.acceptanceCriteria, //cuando haya errores en acceptanceCriteria se cambia el msj
+                    })}
                     placeholder="Acceptance Criteria"
                     name="acceptanceCriteria"
                     value={this.state.acceptanceCriteria}
                     onChange={this.onChange}
                   ></textarea>
+                  {errors.acceptanceCriteria && ( //error desde BD
+                    //style bootstrap
+                    <div className="invalid-feedback">
+                      {errors.acceptanceCriteria}
+                    </div>
+                  )}
                 </div>
                 <h6>Due Date</h6>
                 <div className="form-group">
                   <input
                     type="date"
-                    className="form-control form-control-lg"
+                    className={classnames("form-control form-control-lg ", {
+                      "is-invalid": errors.dueDate, //cuando haya errores en dueDate se cambia el msj
+                    })}
                     name="dueDate"
                     value={this.state.dueDate}
                     onChange={this.onChange}
                   />
+                  {errors.dueDate && ( //error desde BD
+                    //style bootstrap
+                    <div className="invalid-feedback">{errors.dueDate}</div>
+                  )}
                 </div>
                 <div className="form-group">
                   <select
-                    className="form-control form-control-lg"
+                    className={classnames("form-control form-control-lg ", {
+                      "is-invalid": errors.priority, //cuando haya errores en priority se cambia el msj
+                    })}
                     name="priority"
                     value={this.state.priority}
                     onChange={this.onChange}
@@ -100,11 +129,17 @@ class AddProjectTask extends Component {
                     <option value={2}>Medium</option>
                     <option value={3}>Low</option>
                   </select>
+                  {errors.priority && ( //error desde BD
+                    //style bootstrap
+                    <div className="invalid-feedback">{errors.priority}</div>
+                  )}
                 </div>
 
                 <div className="form-group">
                   <select
-                    className="form-control form-control-lg"
+                    className={classnames("form-control form-control-lg ", {
+                      "is-invalid": errors.status, //cuando haya errores en status se cambia el msj
+                    })}
                     name="status"
                     value={this.state.status}
                     onChange={this.onChange}
@@ -114,6 +149,10 @@ class AddProjectTask extends Component {
                     <option value="IN_PROGRESS">IN PROGRESS</option>
                     <option value="DONE">DONE</option>
                   </select>
+                  {errors.status && ( //error desde BD
+                    //style bootstrap
+                    <div className="invalid-feedback">{errors.status}</div>
+                  )}
                 </div>
 
                 <input
@@ -131,6 +170,11 @@ class AddProjectTask extends Component {
 
 AddProjectTask.propTypes = {
   addProjectTask: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
 };
 
-export default connect(null, { addProjectTask })(AddProjectTask);
+const mapStateToProps = (state) => ({
+  errors: state.errors, //trae la data desde la State(Store) y la guarda en props. Se usa en componentWillReceiveProps
+});
+
+export default connect(mapStateToProps, { addProjectTask })(AddProjectTask);
