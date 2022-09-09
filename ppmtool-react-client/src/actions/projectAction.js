@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ERRORS, GET_PROJECT, GET_PROJECTS, DELETE_PORJECT } from "./types";
+import { GET_ERRORS, GET_PROJECT, GET_PROJECTS, DELETE_PROJECT } from "./types";
 
 export const createProject = (project, history) => async (dispatch) => {
   try {
@@ -43,7 +43,7 @@ export const deleteProject = (id) => async (dispatch) => {
   if (window.confirm("Are yo secure?")) {
     await axios.delete(`/api/project/${id}`);
     dispatch({
-      type: DELETE_PORJECT,
+      type: DELETE_PROJECT,
       payload: id,
     });
   }
