@@ -10,6 +10,7 @@ import store from "./store";
 import UpdateProject from "./components/Project/UpdateProject";
 import ProjectBoard from "./components/ProjectBoard/ProjectBoard";
 import AddProjectTask from "./components/ProjectBoard/ProjectTask/AddProjectTask";
+import UpdateProjectTask from "./components/ProjectBoard/ProjectTask/UpdateProjectTask";
 
 //Esta clase es la que se renderiza
 
@@ -28,6 +29,11 @@ class App extends Component {
               exact
               path="/addProjectTask/:id"
               component={AddProjectTask}
+            />
+            <Route
+              exact
+              path="/updateProjectTask/:backlog_id/:pt_id"
+              component={UpdateProjectTask}
             />
           </div>
         </Router>
