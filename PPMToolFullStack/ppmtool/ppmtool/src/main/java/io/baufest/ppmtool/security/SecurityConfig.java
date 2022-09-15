@@ -18,15 +18,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	
 	@Autowired
-	private JWTAuthenticationEntryPoint unathorizedHandler;
+	private JWTAuthenticationEntryPoint unauthorizedHandler;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.cors().and().csrf().disable()
-			.exceptionHandling().authenticationEntryPoint(unathorizedHandler).and()
+			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 			.sessionManagement()
 			.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
+			.headers().frameOptions().sameOrigin() //To enable H2 Database
+            .and()
 			.authorizeRequests()
 			.antMatchers(
 					"/",
@@ -39,6 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 					"/**/*.css",
 					"/**/*.js"
 					).permitAll()
+			.antMatchers("/api/users/**").permitAll() //i have a problem here (video 82)
 			.anyRequest().authenticated();
 	}
 	
