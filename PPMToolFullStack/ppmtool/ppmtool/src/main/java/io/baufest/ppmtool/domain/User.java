@@ -21,13 +21,18 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class User implements UserDetails{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Email(message = "Username need to be an email")
 	@NotBlank(message = "username is required")
-	@Column(unique = true)
+	@Column(unique = true, length = 32)
 	private String username;
 	
 	@NotBlank(message = "Please enter your full name")
