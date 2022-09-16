@@ -1,21 +1,20 @@
 package io.baufest.ppmtool.payload;
 
-public class JWTLoginSuccesResponse {
-	private boolean success;
+public class JWTLoginSucessReponse {
+	private boolean sucess;
 	private String token;
 	
-	public JWTLoginSuccesResponse(boolean success, String token) {
-		this.success = success;
+	public JWTLoginSucessReponse(boolean sucess, String token) {
+		this.sucess = sucess;
 		this.token = token;
 	}
-	
-	
-	public boolean isSuccess() {
-		return success;
+
+	public boolean isSucess() {
+		return sucess;
 	}
 
-	public void setSuccess(boolean success) {
-		this.success = success;
+	public void setSucess(boolean sucess) {
+		this.sucess = sucess;
 	}
 
 	public String getToken() {
@@ -28,10 +27,9 @@ public class JWTLoginSuccesResponse {
 	@Override
 	public String toString() {
 		return "JWTLoginSucessReponse{" +
-        "success=" + success +
+        "sucess=" + sucess +
         ", token='" + token + '\'' +
         '}';
 	}
-	
-	
+
 }
