@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import io.baufest.ppmtool.services.CustomUserDetailsService;
 
@@ -25,9 +26,16 @@ import io.baufest.ppmtool.services.CustomUserDetailsService;
 		jsr250Enabled = true,
 		prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
+	
+
+	@Autowired
+	private JWTAuthenticationEntryPoint unauthorizedHandler;
 
 	@Autowired
 	private CustomUserDetailsService customUserDetailsService;
+	
+	@Bean
+    public JwtAuthenticationFilter jwtAuthenticationFilter() {return  new JwtAuthenticationFilter();}
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -43,11 +51,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		// TODO Auto-generated method stub
 		return super.authenticationManager();
 	}
-
-
-
-	@Autowired
-	private JWTAuthenticationEntryPoint unauthorizedHandler;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -73,6 +76,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.antMatchers(SIGN_UP_URLS).permitAll()
 			.antMatchers(H2_URL).permitAll()//i have a problem here (video 82)
 			.anyRequest().authenticated();
+		
+		http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
 	
 	
