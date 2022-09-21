@@ -1,5 +1,5 @@
 import axios from "axios";
-import setJWTTOKEN from "../securityUtils/setJWTToken";
+import setJWTToken from "../securityUtils/setJWTToken";
 import { GET_ERRORS, SET_CURRENT_USER } from "./types";
 import jwt_decode from "jwt-decode";
 
@@ -18,17 +18,16 @@ export const createNewUser = (newUser, history) => async (dispatch) => {
     });
   }
 };
-
 export const login = (LoginRequest) => async (dispatch) => {
   try {
-    // post => Login request
+    // post => Login Request
     const res = await axios.post("/api/users/login", LoginRequest);
     // extract token from res.data
     const { token } = res.data;
-    //store the token in the localStorage
-    localStorage.setItem("jetToken, token");
-    // set out token in header ***
-    setJWTTOKEN(token);
+    // store the token in the localStorage
+    localStorage.setItem("jwtToken", token);
+    // set our token in header ***
+    setJWTToken(token);
     // decode token on React
     const decoded = jwt_decode(token);
     // dispatch to our securityReducer
